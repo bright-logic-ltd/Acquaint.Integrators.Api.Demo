@@ -60,11 +60,11 @@
             buttonRun.UseVisualStyleBackColor = true;
             buttonRun.Click += buttonRun_Click;
             // 
-            // textBoxResponse
+            // txtApiResponse
             // 
             txtApiResponse.Location = new Point(3, 36);
             txtApiResponse.Multiline = true;
-            txtApiResponse.Name = "textBoxResponse";
+            txtApiResponse.Name = "txtApiResponse";
             txtApiResponse.ReadOnly = true;
             txtApiResponse.ScrollBars = ScrollBars.Both;
             txtApiResponse.Size = new Size(555, 635);

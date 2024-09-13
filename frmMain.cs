@@ -58,6 +58,8 @@ namespace Acquaint.Integrators.Api.Tests
 
         private async Task executeApis()
         {
+            progressBarLoading.Visible = true;
+            buttonRun.Enabled = false;
             txtApiResponse.Text = string.Empty;
             await authLogin();
             if (string.IsNullOrEmpty(jwtToken))
@@ -66,10 +68,7 @@ namespace Acquaint.Integrators.Api.Tests
                 return;
             }
             try
-            {
-                progressBarLoading.Visible = true;
-                buttonRun.Enabled = false;
-
+            {              
                 var response = await executeApiMethods();
 
                 if (response.IsSuccessStatusCode)
@@ -149,6 +148,8 @@ namespace Acquaint.Integrators.Api.Tests
                 }
                 catch (Exception ex)
                 {
+                    progressBarLoading.Visible = false;
+                    buttonRun.Enabled = true;
                     MessageBox.Show("An error occurred: " + ex.Message);
                 }
             }
