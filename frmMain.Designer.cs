@@ -35,12 +35,16 @@
             txtSelectedAPIUrl = new TextBox();
             label3 = new Label();
             splitContainer1 = new SplitContainer();
+            txtAPIKey = new TextBox();
+            label8 = new Label();
+            label7 = new Label();
+            comboBoxUrls = new ComboBox();
             treeViewApis = new TreeView();
             txtAPIRequestBody = new RichTextBox();
             label6 = new Label();
             label5 = new Label();
             txtAuthRequestBody = new RichTextBox();
-            textBoxBaseUrl = new TextBox();
+            txtSitePrefix = new TextBox();
             label4 = new Label();
             progressBarLoading = new ProgressBar();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -52,7 +56,7 @@
             // buttonRun
             // 
             buttonRun.Font = new Font("Segoe UI", 10F);
-            buttonRun.Location = new Point(391, 643);
+            buttonRun.Location = new Point(392, 676);
             buttonRun.Name = "buttonRun";
             buttonRun.Size = new Size(104, 28);
             buttonRun.TabIndex = 1;
@@ -74,7 +78,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label1.Location = new Point(12, 160);
+            label1.Location = new Point(6, 193);
             label1.Name = "label1";
             label1.Size = new Size(31, 15);
             label1.TabIndex = 3;
@@ -93,16 +97,17 @@
             // txtSelectedAPIUrl
             // 
             txtSelectedAPIUrl.Font = new Font("Segoe UI", 9F);
-            txtSelectedAPIUrl.Location = new Point(5, 402);
+            txtSelectedAPIUrl.Location = new Point(6, 435);
             txtSelectedAPIUrl.Name = "txtSelectedAPIUrl";
             txtSelectedAPIUrl.Size = new Size(490, 23);
             txtSelectedAPIUrl.TabIndex = 5;
+            txtSelectedAPIUrl.KeyDown += txtSelectedAPIUrl_KeyDown;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label3.Location = new Point(5, 384);
+            label3.Location = new Point(6, 417);
             label3.Name = "label3";
             label3.Size = new Size(98, 15);
             label3.TabIndex = 6;
@@ -116,13 +121,17 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(txtAPIKey);
+            splitContainer1.Panel1.Controls.Add(label8);
+            splitContainer1.Panel1.Controls.Add(label7);
+            splitContainer1.Panel1.Controls.Add(comboBoxUrls);
             splitContainer1.Panel1.Controls.Add(treeViewApis);
             splitContainer1.Panel1.Controls.Add(txtAPIRequestBody);
             splitContainer1.Panel1.Controls.Add(label6);
             splitContainer1.Panel1.Controls.Add(buttonRun);
             splitContainer1.Panel1.Controls.Add(label5);
             splitContainer1.Panel1.Controls.Add(txtAuthRequestBody);
-            splitContainer1.Panel1.Controls.Add(textBoxBaseUrl);
+            splitContainer1.Panel1.Controls.Add(txtSitePrefix);
             splitContainer1.Panel1.Controls.Add(label4);
             splitContainer1.Panel1.Controls.Add(label1);
             splitContainer1.Panel1.Controls.Add(label3);
@@ -134,14 +143,52 @@
             splitContainer1.Panel2.Controls.Add(progressBarLoading);
             splitContainer1.Panel2.Controls.Add(label2);
             splitContainer1.Panel2.Controls.Add(txtApiResponse);
-            splitContainer1.Size = new Size(1068, 678);
+            splitContainer1.Size = new Size(1068, 716);
             splitContainer1.SplitterDistance = 503;
             splitContainer1.TabIndex = 7;
+            // 
+            // txtAPIKey
+            // 
+            txtAPIKey.Font = new Font("Segoe UI", 9F);
+            txtAPIKey.Location = new Point(89, 58);
+            txtAPIKey.Name = "txtAPIKey";
+            txtAPIKey.Size = new Size(381, 23);
+            txtAPIKey.TabIndex = 16;
+            txtAPIKey.Leave += txtAPIKey_Leave;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(12, 61);
+            label8.Name = "label8";
+            label8.Size = new Size(50, 15);
+            label8.TabIndex = 15;
+            label8.Text = "API Key";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(12, 36);
+            label7.Name = "label7";
+            label7.Size = new Size(66, 15);
+            label7.TabIndex = 14;
+            label7.Text = "Site Prefix";
+            // 
+            // comboBoxUrls
+            // 
+            comboBoxUrls.Font = new Font("Segoe UI", 9F);
+            comboBoxUrls.FormattingEnabled = true;
+            comboBoxUrls.Items.AddRange(new object[] { "https://localhost:44324" });
+            comboBoxUrls.Location = new Point(89, 7);
+            comboBoxUrls.Name = "comboBoxUrls";
+            comboBoxUrls.Size = new Size(381, 23);
+            comboBoxUrls.TabIndex = 13;
+            comboBoxUrls.SelectedValueChanged += comboBoxUrls_SelectedValueChanged;
             // 
             // treeViewApis
             // 
             treeViewApis.Font = new Font("Segoe UI", 9F);
-            treeViewApis.Location = new Point(5, 178);
+            treeViewApis.Location = new Point(6, 211);
             treeViewApis.Name = "treeViewApis";
             treeViewApis.Size = new Size(490, 203);
             treeViewApis.TabIndex = 5;
@@ -151,7 +198,7 @@
             // txtAPIRequestBody
             // 
             txtAPIRequestBody.Font = new Font("Segoe UI", 9F);
-            txtAPIRequestBody.Location = new Point(6, 445);
+            txtAPIRequestBody.Location = new Point(7, 478);
             txtAPIRequestBody.Name = "txtAPIRequestBody";
             txtAPIRequestBody.Size = new Size(489, 192);
             txtAPIRequestBody.TabIndex = 12;
@@ -160,7 +207,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(4, 427);
+            label6.Location = new Point(5, 460);
             label6.Name = "label6";
             label6.Size = new Size(75, 15);
             label6.TabIndex = 11;
@@ -170,7 +217,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label5.Location = new Point(12, 64);
+            label5.Location = new Point(6, 97);
             label5.Name = "label5";
             label5.Size = new Size(65, 15);
             label5.TabIndex = 10;
@@ -179,18 +226,20 @@
             // txtAuthRequestBody
             // 
             txtAuthRequestBody.Font = new Font("Segoe UI", 9F);
-            txtAuthRequestBody.Location = new Point(5, 82);
+            txtAuthRequestBody.Location = new Point(6, 115);
             txtAuthRequestBody.Name = "txtAuthRequestBody";
             txtAuthRequestBody.Size = new Size(490, 75);
             txtAuthRequestBody.TabIndex = 9;
             txtAuthRequestBody.Text = "";
             // 
-            // textBoxBaseUrl
+            // txtSitePrefix
             // 
-            textBoxBaseUrl.Location = new Point(12, 32);
-            textBoxBaseUrl.Name = "textBoxBaseUrl";
-            textBoxBaseUrl.Size = new Size(483, 23);
-            textBoxBaseUrl.TabIndex = 8;
+            txtSitePrefix.Font = new Font("Segoe UI", 9F);
+            txtSitePrefix.Location = new Point(89, 33);
+            txtSitePrefix.Name = "txtSitePrefix";
+            txtSitePrefix.Size = new Size(381, 23);
+            txtSitePrefix.TabIndex = 8;
+            txtSitePrefix.Leave += txtSitePrefix_Leave;
             // 
             // label4
             // 
@@ -215,7 +264,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1068, 678);
+            ClientSize = new Size(1068, 716);
             Controls.Add(splitContainer1);
             Name = "frmMain";
             Text = "Acquaint Integrators API Tests";
@@ -237,12 +286,16 @@
         private Label label3;
         private SplitContainer splitContainer1;
         private Label label4;
-        private TextBox textBoxBaseUrl;
+        private TextBox txtSitePrefix;
         private RichTextBox txtAuthRequestBody;
         private Label label5;
         private RichTextBox txtAPIRequestBody;
         private Label label6;
         private TreeView treeViewApis;
         private ProgressBar progressBarLoading;
+        private ComboBox comboBoxUrls;
+        private Label label7;
+        private TextBox txtAPIKey;
+        private Label label8;
     }
 }

@@ -1,5 +1,6 @@
 using Acquaint.Integrators.Api.Demo.Models;
 using Acquaint.Integrators.Api.Demo.Utilities;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text;
@@ -8,8 +9,7 @@ namespace Acquaint.Integrators.Api.Tests
 {
     public partial class frmMain : Form
     {
-        private const string baseUrl = "https://localhost:44324";
-
+        private string? baseUrl = string.Empty;
         private readonly HttpClient _httpClient = new HttpClient();
         private string jwtToken = string.Empty;
         private List<Category> categories;
@@ -18,12 +18,22 @@ namespace Acquaint.Integrators.Api.Tests
         public frmMain()
         {
             InitializeComponent();
-            textBoxBaseUrl.Text = baseUrl;
-            setInitialAuthRequest();
-            _httpClient = new HttpClient();
             categories = Helper.BuildApiList();
+            initialFeilds();
+        }
+
+        private void initialFeilds()
+        {
+            buttonRun.Enabled = false;
+            txtAuthRequestBody.ReadOnly = true;
+            baseUrl = GetValueFromRegistry("BaseUrl");
+            txtSitePrefix.Text = GetValueFromRegistry("SitePrefix");
+            txtAPIKey.Text = GetValueFromRegistry("APIKey");
+            comboBoxUrls.SelectedItem = baseUrl;
+            setInitialAuthRequest(txtSitePrefix.Text, txtAPIKey.Text);
             PopulateTreeView(categories, treeViewApis);
         }
+
         private async void treeViewApis_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node!.Parent != null)
@@ -70,12 +80,14 @@ namespace Acquaint.Integrators.Api.Tests
                 treeView.Nodes.Add(categoryNode);
             }
         }
-        private void setInitialAuthRequest()
+        private void setInitialAuthRequest(string sitePrefix, string apiKey)
         {
             var requestBody = new
             {
-                SitePrefix = "BL60",
-                ApiKey = "b1ab922f-4267-4fc3-ab67-ffe18e996b71"
+                //SitePrefix = "BL60",
+                //ApiKey = "b1ab922f-4267-4fc3-ab67-ffe18e996b71"
+                SitePrefix = sitePrefix,
+                ApiKey = apiKey,
             };
             txtAuthRequestBody.Text = requestBody.SerializeObjectToJson().FormatStringObjectToJson();
         }
@@ -87,6 +99,7 @@ namespace Acquaint.Integrators.Api.Tests
 
         private async Task executeApis()
         {
+            validateFields();
             progressBarLoading.Visible = true;
             buttonRun.Enabled = false;
             txtApiResponse.Text = string.Empty;
@@ -121,6 +134,25 @@ namespace Acquaint.Integrators.Api.Tests
             }
         }
 
+        private void validateFields()
+        {
+            if (string.IsNullOrEmpty(baseUrl))
+            {
+                MessageBox.Show("Please select the base url.");
+                return;
+            }
+            if (string.IsNullOrEmpty(txtSitePrefix.Text))
+            {
+                MessageBox.Show("Please enter site prefix.");
+                return;
+            }
+            if (string.IsNullOrEmpty(txtAPIKey.Text))
+            {
+                MessageBox.Show("Please enter API key.");
+                return;
+            }
+        }
+
         private async Task<HttpResponseMessage> executeApiMethods()
         {
             try
@@ -133,20 +165,19 @@ namespace Acquaint.Integrators.Api.Tests
                 switch (selectedAPI?.MethodType)
                 {
                     case ApiMethodType.GET:
-                        response = await _httpClient.GetAsync($"{textBoxBaseUrl.Text}/{txtSelectedAPIUrl.Text}");
+                        response = await _httpClient.GetAsync($"{baseUrl}/{txtSelectedAPIUrl.Text}");
                         break;
                     case ApiMethodType.POST:
-                        response = await _httpClient.PostAsync($"{textBoxBaseUrl.Text}/{txtSelectedAPIUrl.Text}", httpContent);
+                        response = await _httpClient.PostAsync($"{baseUrl}/{txtSelectedAPIUrl.Text}", httpContent);
                         break;
                     case ApiMethodType.PUT:
-                        response = await _httpClient.PutAsync($"{textBoxBaseUrl.Text}/{txtSelectedAPIUrl.Text}", httpContent);
+                        response = await _httpClient.PutAsync($"{baseUrl}/{txtSelectedAPIUrl.Text}", httpContent);
                         break;
                     default:
                         // Code to execute if no cases match
                         break;
                 }
                 return response;
-
             }
             catch (Exception)
             {
@@ -162,7 +193,7 @@ namespace Acquaint.Integrators.Api.Tests
 
                 try
                 {
-                    HttpResponseMessage response = await _httpClient.PostAsync($"{textBoxBaseUrl.Text}/Auth", httpContent);
+                    HttpResponseMessage response = await _httpClient.PostAsync($"{baseUrl}/Auth", httpContent);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -172,16 +203,88 @@ namespace Acquaint.Integrators.Api.Tests
                     }
                     else
                     {
+                        progressBarLoading.Visible = false;
                         MessageBox.Show("Login Failed: " + response.StatusCode);
                     }
                 }
                 catch (Exception ex)
                 {
                     progressBarLoading.Visible = false;
-                    buttonRun.Enabled = true;
                     MessageBox.Show("An error occurred: " + ex.Message);
                 }
             }
+        }
+
+        private void comboBoxUrls_SelectedValueChanged(object sender, EventArgs e)
+        {
+            baseUrl = comboBoxUrls.SelectedItem?.ToString();
+            if (!string.IsNullOrEmpty(baseUrl))
+            {
+                SetValueToRegistry("BaseUrl", baseUrl);
+            }
+        }
+
+        private void SetValueToRegistry(string key, string value)
+        {
+            jwtToken = string.Empty;
+            RegistryKey? regKey = Registry.CurrentUser.OpenSubKey($"Software\\Acquaint.Integrators.Api", true);
+
+            if (regKey == null)
+            {
+                regKey = Registry.CurrentUser.CreateSubKey("Software\\Acquaint.Integrators.Api");
+            }
+
+            if (regKey != null)
+            {
+                regKey.SetValue(key, value, RegistryValueKind.String);
+                regKey.Close();
+            }
+            else
+            {
+                MessageBox.Show("Error accessing Registry.");
+            }
+        }
+        private string GetValueFromRegistry(string key)
+        {
+            RegistryKey? regKey = Registry.CurrentUser.OpenSubKey($"Software\\Acquaint.Integrators.Api", true);
+
+            if (regKey != null)
+            {
+                return (string)regKey.GetValue(key)!;
+            }
+            return string.Empty;
+        }
+
+        private void txtAPIKey_Leave(object sender, EventArgs e)
+        {
+            setInitialAuthRequest(txtSitePrefix.Text, txtAPIKey.Text);
+            if (txtAPIKey.Text != string.Empty)
+            {
+                SetValueToRegistry("APIKey", txtAPIKey.Text);
+            }
+        }
+
+        private void txtSitePrefix_Leave(object sender, EventArgs e)
+        {
+            setInitialAuthRequest(txtSitePrefix.Text, string.Empty);
+            if (txtSitePrefix.Text != string.Empty)
+            {
+                SetValueToRegistry("SitePrefix", txtSitePrefix.Text);
+            }
+        }
+
+        private async void txtSelectedAPIUrl_Enter(object sender, EventArgs e)
+        {
+            await executeApis();
+        }
+
+        private async void txtSelectedAPIUrl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                await executeApis();
+            }
+           
         }
     }
 }
