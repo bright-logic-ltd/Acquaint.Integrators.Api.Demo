@@ -29,7 +29,14 @@ namespace Acquaint.Integrators.Api.Tests
             baseUrl = GetValueFromRegistry("BaseUrl");
             txtSitePrefix.Text = GetValueFromRegistry("SitePrefix");
             txtAPIKey.Text = GetValueFromRegistry("APIKey");
-            comboBoxUrls.SelectedItem = baseUrl;
+            if (!string.IsNullOrEmpty(baseUrl))
+            {
+                comboBoxUrls.SelectedItem = baseUrl;
+            }
+            else
+            {
+                comboBoxUrls.SelectedIndex = 0;
+            }
             setInitialAuthRequest(txtSitePrefix.Text, txtAPIKey.Text);
             PopulateTreeView(categories, treeViewApis);
         }
@@ -84,8 +91,6 @@ namespace Acquaint.Integrators.Api.Tests
         {
             var requestBody = new
             {
-                //SitePrefix = "BL60",
-                //ApiKey = "b1ab922f-4267-4fc3-ab67-ffe18e996b71"
                 SitePrefix = sitePrefix,
                 ApiKey = apiKey,
             };

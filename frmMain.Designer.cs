@@ -178,7 +178,7 @@
             // 
             comboBoxUrls.Font = new Font("Segoe UI", 9F);
             comboBoxUrls.FormattingEnabled = true;
-            comboBoxUrls.Items.AddRange(new object[] { "https://localhost:44324" });
+            comboBoxUrls.Items.AddRange(new object[] { "https://api.integrators.acquaintcrm.co.uk/", "https://localhost:44324" });
             comboBoxUrls.Location = new Point(89, 7);
             comboBoxUrls.Name = "comboBoxUrls";
             comboBoxUrls.Size = new Size(381, 23);
