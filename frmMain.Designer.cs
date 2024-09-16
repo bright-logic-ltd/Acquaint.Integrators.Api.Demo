@@ -145,6 +145,7 @@
             treeViewApis.Name = "treeViewApis";
             treeViewApis.Size = new Size(490, 203);
             treeViewApis.TabIndex = 5;
+            treeViewApis.BeforeExpand += treeViewApis_BeforeExpand;
             treeViewApis.AfterSelect += treeViewApis_AfterSelect;
             // 
             // txtAPIRequestBody
@@ -217,7 +218,7 @@
             ClientSize = new Size(1068, 678);
             Controls.Add(splitContainer1);
             Name = "frmMain";
-            Text = "Main";
+            Text = "Acquaint Integrators API Tests";
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);

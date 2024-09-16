@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
-namespace Acquaint.Integrators.Api.Tests.Utilities
+namespace Acquaint.Integrators.Api.Demo.Utilities
 {
     public static class StringExtensions
     {

@@ -1,4 +1,4 @@
-﻿namespace Acquaint.Integrators.Api.Tests.Models
+﻿namespace Acquaint.Integrators.Api.Demo.Models
 {
     public class Subcategory
     {

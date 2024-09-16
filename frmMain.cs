@@ -1,5 +1,5 @@
-using Acquaint.Integrators.Api.Tests.Models;
-using Acquaint.Integrators.Api.Tests.Utilities;
+using Acquaint.Integrators.Api.Demo.Models;
+using Acquaint.Integrators.Api.Demo.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text;
@@ -23,6 +23,35 @@ namespace Acquaint.Integrators.Api.Tests
             _httpClient = new HttpClient();
             categories = Helper.BuildApiList();
             PopulateTreeView(categories, treeViewApis);
+        }
+        private async void treeViewApis_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node!.Parent != null)
+            {
+                Subcategory? selectedSubcategory = e.Node.Tag as Subcategory;
+                if (selectedSubcategory != null)
+                {
+                    txtApiResponse.Text = string.Empty;
+                    selectedAPI = selectedSubcategory;
+                    txtSelectedAPIUrl.Text = selectedSubcategory.Url;
+                    txtAPIRequestBody.Text = selectedSubcategory.RequestBody;
+                    if (selectedAPI.MethodType == ApiMethodType.GET)
+                    {
+                        await executeApis();
+                    }
+                }
+            }
+        }
+
+        private void treeViewApis_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+            foreach (TreeNode node in treeViewApis.Nodes)
+            {
+                if (node.IsExpanded && node != e.Node)
+                {
+                    node.Collapse();
+                }
+            }
         }
 
         private void PopulateTreeView(List<Category> categories, TreeView treeView)
@@ -68,7 +97,7 @@ namespace Acquaint.Integrators.Api.Tests
                 return;
             }
             try
-            {              
+            {
                 var response = await executeApiMethods();
 
                 if (response.IsSuccessStatusCode)
@@ -151,25 +180,6 @@ namespace Acquaint.Integrators.Api.Tests
                     progressBarLoading.Visible = false;
                     buttonRun.Enabled = true;
                     MessageBox.Show("An error occurred: " + ex.Message);
-                }
-            }
-        }
-
-        private async void treeViewApis_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            if (e.Node!.Parent != null)
-            {
-                Subcategory? selectedSubcategory = e.Node.Tag as Subcategory;
-                if (selectedSubcategory != null)
-                {
-                    txtApiResponse.Text = string.Empty;
-                    selectedAPI = selectedSubcategory;
-                    txtSelectedAPIUrl.Text = selectedSubcategory.Url;
-                    txtAPIRequestBody.Text = selectedSubcategory.RequestBody;
-                    if (selectedAPI.MethodType == ApiMethodType.GET)
-                    {
-                        await executeApis();
-                    }
                 }
             }
         }
