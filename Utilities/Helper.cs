@@ -42,7 +42,7 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                     }
                 },
                 new Category
-                { 
+                {
                     Name = "Notes",
                     Subcategories = new List<Subcategory>
                     {
@@ -138,7 +138,7 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                             Name = "Create Task",
                             MethodType = ApiMethodType.POST,
                             RequestBody = $"{{\r\n    \"contactId\": 393,\r\n    \"propertyId\": 12,\r\n    \"subject\": \"Call Re: Valuation 2\",\r\n    \"body\": \"Interested in 30 Brentford Close but not on market yet.\",\r\n    \"taskTypeId\": 3,\r\n    \"priority\": 3,\r\n    \"startDate\": \"2012-11-15T00:00:00\",\r\n    \"dueDate\": \"2012-11-15T00:00:00\",\r\n    \"completedDate\": \"2017-11-15T13:25:42\",        \r\n    \"assignedToUserId\": 11080\r\n}}"
-                        },                 
+                        },
                     }
                 },
                 new Category
@@ -156,7 +156,15 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                             RequestBody = $"{{\r\n    \"contactId\": 22700,\r\n    \"propertyId\": 3869,\r\n    \"managementTypeId\": 1,\r\n    \"status\": 9,\r\n    \"minUpdatedDate\": \"2023-05-03T09:19:38\",\r\n    \"maxUpdatedDate\": \"2023-05-03T09:19:38\",\r\n    \"minStartDate\": \"2015-04-30T00:00:00\",\r\n    \"maxStartDate\": \"2015-04-30T00:00:00\",\r\n    \"minEndDate\": \"2023-04-29T00:00:00\",\r\n    \"maxEndDate\": \"2023-04-29T00:00:00\"\r\n}}"
                         }
                     }
-                }
+                },
+                new Category
+                {
+                    Name = "Users",
+                    Subcategories = new List<Subcategory>
+                    {
+                        new Subcategory{ Url = "/v1/Users/list", Name = "Get All Users", MethodType = ApiMethodType.GET },
+                    }
+                 }
             ];
         }
     }

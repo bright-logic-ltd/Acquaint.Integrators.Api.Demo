@@ -24,7 +24,6 @@ namespace Acquaint.Integrators.Api.Tests
 
         private void initialFeilds()
         {
-            buttonRun.Enabled = false;
             txtAuthRequestBody.ReadOnly = true;
             baseUrl = GetValueFromRegistry("BaseUrl");
             txtSitePrefix.Text = GetValueFromRegistry("SitePrefix");
@@ -55,11 +54,7 @@ namespace Acquaint.Integrators.Api.Tests
                     if (selectedAPI.MethodType == ApiMethodType.GET)
                     {
                         await executeApis();
-                    }
-                    else
-                    {
-                        buttonRun.Enabled = true;
-                    }
+                    }                   
                 }
             }
         }
@@ -110,7 +105,6 @@ namespace Acquaint.Integrators.Api.Tests
         {
             validateFields();
             progressBarLoading.Visible = true;
-            buttonRun.Enabled = false;
             txtApiResponse.Text = string.Empty;
             await authLogin();
             if (string.IsNullOrEmpty(jwtToken))
@@ -133,12 +127,10 @@ namespace Acquaint.Integrators.Api.Tests
                     MessageBox.Show("API Call Failed: " + response.StatusCode);
                 }
                 progressBarLoading.Visible = false;
-                buttonRun.Enabled = true;
             }
             catch (Exception ex)
             {
                 progressBarLoading.Visible = false;
-                buttonRun.Enabled = true;
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
         }
