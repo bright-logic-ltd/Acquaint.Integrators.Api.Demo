@@ -56,6 +56,10 @@ namespace Acquaint.Integrators.Api.Tests
                     {
                         await executeApis();
                     }
+                    else
+                    {
+                        buttonRun.Enabled = true;
+                    }
                 }
             }
         }
@@ -198,7 +202,7 @@ namespace Acquaint.Integrators.Api.Tests
 
                 try
                 {
-                    HttpResponseMessage response = await _httpClient.PostAsync($"{baseUrl}/Auth", httpContent);
+                    HttpResponseMessage response = await _httpClient.PostAsync($"{baseUrl}/v1/Auth", httpContent);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -267,6 +271,7 @@ namespace Acquaint.Integrators.Api.Tests
             {
                 SetValueToRegistry("APIKey", txtAPIKey.Text);
             }
+            setInitialAuthRequest(txtSitePrefix.Text, txtAPIKey.Text);
         }
 
         private void txtSitePrefix_Leave(object sender, EventArgs e)
@@ -276,6 +281,7 @@ namespace Acquaint.Integrators.Api.Tests
             {
                 SetValueToRegistry("SitePrefix", txtSitePrefix.Text);
             }
+            setInitialAuthRequest(txtSitePrefix.Text, txtAPIKey.Text);
         }
 
         private async void txtSelectedAPIUrl_Enter(object sender, EventArgs e)
@@ -289,7 +295,6 @@ namespace Acquaint.Integrators.Api.Tests
             {
                 await executeApis();
             }
-           
         }
     }
 }
