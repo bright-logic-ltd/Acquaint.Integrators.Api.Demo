@@ -54,7 +54,7 @@ namespace Acquaint.Integrators.Api.Tests
                     if (selectedAPI.MethodType == ApiMethodType.GET)
                     {
                         await executeApis();
-                    }                   
+                    }
                 }
             }
         }
@@ -161,12 +161,18 @@ namespace Acquaint.Integrators.Api.Tests
                 var response = new HttpResponseMessage();
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
 
+                var queryString = string.Empty;
+                if (!string.IsNullOrEmpty(txtAPIRequestBody.Text))
+                {
+                    queryString = txtAPIRequestBody.Text.ToQueryString();
+                }
+
                 var httpContent = new StringContent(txtAPIRequestBody.Text, Encoding.UTF8, "application/json");
 
                 switch (selectedAPI?.MethodType)
                 {
                     case ApiMethodType.GET:
-                        response = await _httpClient.GetAsync($"{baseUrl}/{txtSelectedAPIUrl.Text}");
+                        response = await _httpClient.GetAsync($"{baseUrl}/{txtSelectedAPIUrl.Text}{queryString}");
                         break;
                     case ApiMethodType.POST:
                         response = await _httpClient.PostAsync($"{baseUrl}/{txtSelectedAPIUrl.Text}", httpContent);

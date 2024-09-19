@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
+using System.Web;
 
 namespace Acquaint.Integrators.Api.Demo.Utilities
 {
@@ -17,6 +18,20 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
         public static string FormatStringObjectToJson(this string str)
         {
             return JToken.Parse(str).ToString(Formatting.Indented);
+        }
+
+        public static string ToQueryString(this string jsonString)
+        {
+           var jsonObject = JObject.Parse(jsonString);
+            var queryString = string.Empty;
+            foreach (var property in jsonObject.Properties())
+            {
+                string propertyName = property.Name;
+                JToken propertyValue = property.Value;
+                queryString += $"{HttpUtility.UrlEncode(propertyName)}={HttpUtility.UrlEncode(propertyValue?.ToString())}&";
+            }
+
+            return "?" + queryString;
         }
     }
 }
