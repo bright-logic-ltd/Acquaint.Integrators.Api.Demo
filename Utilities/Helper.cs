@@ -25,7 +25,7 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                             Name = "Get List of Contacts",
                             Url = "/Contacts/list",
                             MethodType = ApiMethodType.POST,
-                            RequestBody = $"{{\r\n    \"firstNames\": \"\",\r\n    \"lastName\": \"\",\r\n    \"companyName\": \"\",\r\n    \"email\": \"test23083@brightlogic.co.uk\",\r\n    \"telephone\": \"\",\r\n    \"mobile\": \"\",\r\n    \"altReference\": \"\",\r\n    \"type\": 1,\r\n    \"status\": 1,\r\n    \"minUpdatedDate\": \"2017-02-06T11:36:11\",\r\n    \"maxUpdatedDate\": \"2023-02-06T11:36:11\"\r\n}}"
+                            RequestBody = $"{{\r\n    \"firstNames\": \"\",\r\n    \"lastName\": \"\",\r\n    \"companyName\": \"\",\r\n    \"email\": \"\",\r\n    \"telephone\": \"\",\r\n    \"mobile\": \"\",\r\n    \"altReference\": \"\",\r\n    \"type\": 1,\r\n    \"status\": 1,\r\n    \"siteId\": 0,\r\n    \"minUpdatedDate\": \"2017-02-06T11:36:11\",\r\n    \"maxUpdatedDate\": \"2023-02-06T11:36:11\"\r\n}}"
                         },
                         new Subcategory{
                             Name = "Update Contact",
@@ -57,7 +57,7 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                             Name = "Get List Of Properties",
                             Url ="/Properties/list",
                             MethodType = ApiMethodType.POST,
-                            RequestBody = $"{{\r\n    \"propertyName\": \"\",\r\n    \"street\": \"\",\r\n    \"locality\": \"\",\r\n    \"town\": \"\",\r\n    \"postcode\": \" oX10\",\r\n    \"altReference\": \"B231\",\r\n    \"contactId\": 0,\r\n    \"categoryId\": 0,\r\n    \"statusId\": 3,\r\n    \"tenureId\": 0,\r\n    \"propertyAreaId\": 0,\r\n    \"minPrice\": 110.0,\r\n    \"maxPrice\": 222220.0,\r\n    \"bedrooms\": 0,\r\n    \"minUpdatedDate\": \"2022-04-03T00:00:00\",\r\n    \"maxUpdatedDate\": \"2024-04-03T00:00:00\"\r\n}}"
+                            RequestBody = $"{{\r\n    \"propertyName\": \"\",\r\n    \"street\": \"\",\r\n    \"locality\": \"\",\r\n    \"town\": \"\",\r\n    \"postcode\": \" oX10\",\r\n    \"altReference\": \"B231\",\r\n    \"contactId\": 0,\r\n    \"categoryId\": 0,\r\n    \"statusId\": 3,\r\n    \"tenureId\": 0,\r\n    \"propertyAreaId\": 0,\r\n    \"minPrice\": 110.0,\r\n    \"maxPrice\": 222220.0,\r\n    \"bedrooms\": 0,\r\n    \"siteId\": 0,\r\n    \"minUpdatedDate\": \"2022-04-03T00:00:00\",\r\n    \"maxUpdatedDate\": \"2024-04-03T00:00:00\"\r\n}}"
                         }
                     }
                 },
@@ -85,6 +85,15 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                             MethodType = ApiMethodType.POST,
                             RequestBody = $"{{\r\n    \"propertyId\": 35,\r\n    \"contactId\": 26073,\r\n    \"offerDate\": \"2002-11-26T00:00:00\",\r\n    \"amount\": 775000.00,\r\n    \"notes\": \"\",\r\n    \"statusId\": 2,\r\n    \"solicitorId\": 0,\r\n    \"exchangedContracts\": \"1900-01-01T00:00:00\",\r\n    \"completionDate\": \"1900-01-01T00:00:00\"\r\n}}"
                         },
+                    }
+                },
+                new Category
+                {
+                    Name = "Sites",
+                    Subcategories = new List<Subcategory>
+                    {
+                        new Subcategory{ Url = "/v1/Sites/0", Name = "Get Site By Id", MethodType= ApiMethodType.GET },
+                        new Subcategory{ Url = "/v1/Sites/list", Name = "Get All Sites", MethodType = ApiMethodType.GET },
                     }
                 },
                 new Category
