@@ -31,13 +31,37 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                             Name = "Update Contact",
                             Url = "/v1/Contacts/1",
                             MethodType = ApiMethodType.PUT,
-                            RequestBody=$"{{\r\n    \"firstNames\": \"Alexander\",\r\n    \"lastName\": \"Johnson\",\r\n    \"company\": \"Web Estate Agents\",\r\n    \"address\": {{\r\n        \"propertyName\": \"\",\r\n        \"street\": \"\",\r\n        \"locality\": \"\",\r\n        \"town\": \"Mirfield\",\r\n        \"region\": \"West Yorkshire\",\r\n        \"postcode\": \"\",\r\n        \"countryCode\": 826,\r\n        \"isHomeAddress\": true\r\n    }},\r\n    \"telephone\": \"0141 277 1068\",\r\n    \"telephoneAlt\": \"07622879897\",\r\n    \"mobile\": \"07708 055005\",\r\n    \"email\": \"test@brightlogic.co.uk\",\r\n    \"emailAlt\": \"test25966@brightlogic.co.uk\",\r\n    \"typeId\": 3,\r\n    \"statusId\": 1007,\r\n    \"sourceId\": 1026,\r\n    \"titleId\": 1002,\r\n    \"altReference\": \"\"\r\n}}"
+                            RequestBody=$"{{\r\n  \"firstNames\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"company\": \"string\",\r\n  \"address\": {{\r\n    \"isHomeAddress\": true,\r\n    \"propertyName\": \"string\",\r\n    \"street\": \"string\",\r\n    \"locality\": \"string\",\r\n    \"town\": \"string\",\r\n    \"region\": \"string\",\r\n    \"postcode\": \"string\",\r\n    \"countryCode\": 0\r\n  }},\r\n  \"telephone\": \"string\",\r\n  \"telephoneAlt\": \"string\",\r\n  \"mobile\": \"string\",\r\n  \"email\": \"string\",\r\n  \"emailAlt\": \"string\",\r\n  \"statusId\": 0,\r\n  \"titleId\": 0,\r\n  \"sourceId\": 0,\r\n  \"siteId\": 0,\r\n  \"altReference\": \"string\"\r\n}}"
                         },
-                            new Subcategory{
-                            Name = "Create Contact",
-                            Url = "/v1/Contacts",
+                        new Subcategory{
+                            Name = "Create Vendor",
+                            Url = "/v1/Contacts/Vendor",
                             MethodType = ApiMethodType.POST,
-                            RequestBody=$"{{\r\n    \"firstNames\": \"Scott\",\r\n    \"lastName\": \"Smith\",\r\n    \"company\": \"A. Peters & CO.\",\r\n    \"address\": {{\r\n        \"propertyName\": \"\",\r\n        \"street\": \"\",\r\n        \"locality\": \"\",\r\n        \"town\": \"Mirfield\",\r\n        \"region\": \"West Yorkshire\",\r\n        \"postcode\": \"\",\r\n        \"countryCode\": 826,\r\n        \"isHomeAddress\": true\r\n    }},\r\n    \"telephone\": \"0141 277 1068\",\r\n    \"telephoneAlt\": \"07622879897\",\r\n    \"mobile\": \"07708 055005\",\r\n    \"email\": \"test@brightlogic.co.uk\",\r\n    \"emailAlt\": \"test25966@brightlogic.co.uk\",\r\n    \"typeId\": 12,\r\n    \"statusId\": 2,\r\n    \"titleId\": 10,\r\n    \"sourceId\": 1,\r\n    \"altReference\": \"\"\r\n}}"
+                            RequestBody=$"{{\r\n  \"firstNames\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"company\": \"string\",\r\n  \"address\": {{\r\n    \"isHomeAddress\": true,\r\n    \"propertyName\": \"string\",\r\n    \"street\": \"string\",\r\n    \"locality\": \"string\",\r\n    \"town\": \"string\",\r\n    \"region\": \"string\",\r\n    \"postcode\": \"string\",\r\n    \"countryCode\": 0\r\n  }},\r\n  \"telephone\": \"string\",\r\n  \"telephoneAlt\": \"string\",\r\n  \"mobile\": \"string\",\r\n  \"email\": \"string\",\r\n  \"emailAlt\": \"string\",\r\n  \"statusId\": 0,\r\n  \"titleId\": 0,\r\n  \"sourceId\": 0,\r\n  \"siteId\": 0,\r\n  \"altReference\": \"string\"\r\n}}"
+                        },
+                        new Subcategory{
+                            Name = "Create Landlord",
+                            Url = "/v1/Contacts/Landlord",
+                            MethodType = ApiMethodType.POST,
+                            RequestBody=$"{{\r\n  \"firstNames\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"company\": \"string\",\r\n  \"address\": {{\r\n    \"isHomeAddress\": true,\r\n    \"propertyName\": \"string\",\r\n    \"street\": \"string\",\r\n    \"locality\": \"string\",\r\n    \"town\": \"string\",\r\n    \"region\": \"string\",\r\n    \"postcode\": \"string\",\r\n    \"countryCode\": 0\r\n  }},\r\n  \"telephone\": \"string\",\r\n  \"telephoneAlt\": \"string\",\r\n  \"mobile\": \"string\",\r\n  \"email\": \"string\",\r\n  \"emailAlt\": \"string\",\r\n  \"statusId\": 0,\r\n  \"titleId\": 0,\r\n  \"sourceId\": 0,\r\n  \"siteId\": 0,\r\n  \"altReference\": \"string\"\r\n}}"
+                        },
+                        new Subcategory{
+                            Name = "Create Solicitor",
+                            Url = "/v1/Contacts/Solicitor",
+                            MethodType = ApiMethodType.POST,
+                            RequestBody=$"{{\r\n  \"firstNames\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"company\": \"string\",\r\n  \"address\": {{\r\n    \"isHomeAddress\": true,\r\n    \"propertyName\": \"string\",\r\n    \"street\": \"string\",\r\n    \"locality\": \"string\",\r\n    \"town\": \"string\",\r\n    \"region\": \"string\",\r\n    \"postcode\": \"string\",\r\n    \"countryCode\": 0\r\n  }},\r\n  \"telephone\": \"string\",\r\n  \"telephoneAlt\": \"string\",\r\n  \"mobile\": \"string\",\r\n  \"email\": \"string\",\r\n  \"emailAlt\": \"string\",\r\n  \"statusId\": 0,\r\n  \"titleId\": 0,\r\n  \"sourceId\": 0,\r\n  \"siteId\": 0,\r\n  \"altReference\": \"string\"\r\n}}"
+                        },
+                        new Subcategory{
+                            Name = "Create Sales Applicant",
+                            Url = "/v1/Contacts/SalesApplicant",
+                            MethodType = ApiMethodType.POST,
+                            RequestBody=$"{{\r\n  \"usage\": 0,\r\n  \"minPrice\": 0,\r\n  \"maxPrice\": 0,\r\n  \"minBedrooms\": 0,\r\n  \"firstNames\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"company\": \"string\",\r\n  \"address\": {{\r\n    \"isHomeAddress\": true,\r\n    \"propertyName\": \"string\",\r\n    \"street\": \"string\",\r\n    \"locality\": \"string\",\r\n    \"town\": \"string\",\r\n    \"region\": \"string\",\r\n    \"postcode\": \"string\",\r\n    \"countryCode\": 0\r\n  }},\r\n  \"telephone\": \"string\",\r\n  \"telephoneAlt\": \"string\",\r\n  \"mobile\": \"string\",\r\n  \"email\": \"string\",\r\n  \"emailAlt\": \"string\",\r\n  \"statusId\": 0,\r\n  \"titleId\": 0,\r\n  \"sourceId\": 0,\r\n  \"siteId\": 0,\r\n  \"altReference\": \"string\"\r\n}}"
+                        },
+                        new Subcategory{
+                            Name = "Create Lettings Applicant",
+                            Url = "/v1/Contacts/LettingsApplicant",
+                            MethodType = ApiMethodType.POST,
+                            RequestBody=$"{{\r\n  \"usage\": 0,\r\n  \"minPrice\": 0,\r\n  \"maxPrice\": 0,\r\n  \"minBedrooms\": 0,\r\n  \"isStudent\": true,\r\n  \"firstNames\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"company\": \"string\",\r\n  \"address\": {{\r\n    \"isHomeAddress\": true,\r\n    \"propertyName\": \"string\",\r\n    \"street\": \"string\",\r\n    \"locality\": \"string\",\r\n    \"town\": \"string\",\r\n    \"region\": \"string\",\r\n    \"postcode\": \"string\",\r\n    \"countryCode\": 0\r\n  }},\r\n  \"telephone\": \"string\",\r\n  \"telephoneAlt\": \"string\",\r\n  \"mobile\": \"string\",\r\n  \"email\": \"string\",\r\n  \"emailAlt\": \"string\",\r\n  \"statusId\": 0,\r\n  \"titleId\": 0,\r\n  \"sourceId\": 0,\r\n  \"siteId\": 0,\r\n  \"altReference\": \"string\"\r\n}}"
                         }
                     }
                 },
