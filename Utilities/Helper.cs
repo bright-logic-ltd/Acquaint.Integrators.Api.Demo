@@ -275,6 +275,7 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                     Subcategories = new List<Subcategory>
                     {
                         new Subcategory{ Url = "/v1/Users/list", Name = "Get All Users", MethodType = ApiMethodType.GET },
+                         new Subcategory{ Url = "/v1/Users/1", Name = "Get User By Id", MethodType = ApiMethodType.GET },
                     }
                  }
             ];
