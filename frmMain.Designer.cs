@@ -56,7 +56,7 @@
             // buttonRun
             // 
             buttonRun.Font = new Font("Segoe UI", 10F);
-            buttonRun.Location = new Point(392, 676);
+            buttonRun.Location = new Point(392, 767);
             buttonRun.Name = "buttonRun";
             buttonRun.Size = new Size(104, 28);
             buttonRun.TabIndex = 1;
@@ -71,7 +71,7 @@
             txtApiResponse.Name = "txtApiResponse";
             txtApiResponse.ReadOnly = true;
             txtApiResponse.ScrollBars = ScrollBars.Both;
-            txtApiResponse.Size = new Size(555, 635);
+            txtApiResponse.Size = new Size(555, 759);
             txtApiResponse.TabIndex = 2;
             // 
             // label1
@@ -97,7 +97,7 @@
             // txtSelectedAPIUrl
             // 
             txtSelectedAPIUrl.Font = new Font("Segoe UI", 9F);
-            txtSelectedAPIUrl.Location = new Point(6, 435);
+            txtSelectedAPIUrl.Location = new Point(6, 526);
             txtSelectedAPIUrl.Name = "txtSelectedAPIUrl";
             txtSelectedAPIUrl.Size = new Size(490, 23);
             txtSelectedAPIUrl.TabIndex = 5;
@@ -107,7 +107,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label3.Location = new Point(6, 417);
+            label3.Location = new Point(6, 508);
             label3.Name = "label3";
             label3.Size = new Size(98, 15);
             label3.TabIndex = 6;
@@ -143,7 +143,7 @@
             splitContainer1.Panel2.Controls.Add(progressBarLoading);
             splitContainer1.Panel2.Controls.Add(label2);
             splitContainer1.Panel2.Controls.Add(txtApiResponse);
-            splitContainer1.Size = new Size(1068, 716);
+            splitContainer1.Size = new Size(1068, 802);
             splitContainer1.SplitterDistance = 503;
             splitContainer1.TabIndex = 7;
             // 
@@ -190,7 +190,7 @@
             treeViewApis.Font = new Font("Segoe UI", 9F);
             treeViewApis.Location = new Point(6, 211);
             treeViewApis.Name = "treeViewApis";
-            treeViewApis.Size = new Size(490, 203);
+            treeViewApis.Size = new Size(490, 294);
             treeViewApis.TabIndex = 5;
             treeViewApis.BeforeExpand += treeViewApis_BeforeExpand;
             treeViewApis.AfterSelect += treeViewApis_AfterSelect;
@@ -198,7 +198,7 @@
             // txtAPIRequestBody
             // 
             txtAPIRequestBody.Font = new Font("Segoe UI", 9F);
-            txtAPIRequestBody.Location = new Point(7, 478);
+            txtAPIRequestBody.Location = new Point(7, 569);
             txtAPIRequestBody.Name = "txtAPIRequestBody";
             txtAPIRequestBody.Size = new Size(489, 192);
             txtAPIRequestBody.TabIndex = 12;
@@ -207,7 +207,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(5, 460);
+            label6.Location = new Point(5, 551);
             label6.Name = "label6";
             label6.Size = new Size(75, 15);
             label6.TabIndex = 11;
@@ -264,7 +264,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1068, 716);
+            ClientSize = new Size(1068, 802);
             Controls.Add(splitContainer1);
             Name = "frmMain";
             Text = "Acquaint Integrators API Tests";

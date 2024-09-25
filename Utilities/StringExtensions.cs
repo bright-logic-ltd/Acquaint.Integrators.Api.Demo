@@ -28,7 +28,16 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
             {
                 string propertyName = property.Name;
                 JToken propertyValue = property.Value;
-                queryString += $"{HttpUtility.UrlEncode(propertyName)}={HttpUtility.UrlEncode(propertyValue?.ToString())}&";
+                if (propertyValue.Type == JTokenType.Date)
+                {
+                    DateTime dateTime = propertyValue.ToObject<DateTime>();
+                    string formattedDate = dateTime.ToString("yyyy-MM-dd");
+                    queryString += $"{HttpUtility.UrlEncode(propertyName)}={HttpUtility.UrlEncode(formattedDate?.ToString())}&";
+                }
+                else
+                {
+                    queryString += $"{HttpUtility.UrlEncode(propertyName)}={HttpUtility.UrlEncode(propertyValue?.ToString())}&";
+                }                
             }
 
             return "?" + queryString;
