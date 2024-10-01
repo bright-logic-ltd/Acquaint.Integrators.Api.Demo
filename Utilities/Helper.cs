@@ -173,7 +173,7 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                     Name = "Propertie Areas",
                     Subcategories = new List<Subcategory>
                     {
-                         new Subcategory { Url = "/v1/PropertyAreas/{id}", Name = "Get Property Area by Id", MethodType= ApiMethodType.GET },
+                        new Subcategory { Url = "/v1/PropertyAreas/{id}", Name = "Get Property Area by Id", MethodType= ApiMethodType.GET },
                         new Subcategory
                         {
                             Url = "/v1/PropertyAreas/list",
@@ -297,7 +297,7 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                     Name = "Task Types",
                     Subcategories = new List<Subcategory>
                     {
-                         new Subcategory{ Url = "/v1/TaskTypes/{id}", Name = "Get Task Type by Id", MethodType = ApiMethodType.GET },
+                        new Subcategory{ Url = "/v1/TaskTypes/{id}", Name = "Get Task Type by Id", MethodType = ApiMethodType.GET },
                         new Subcategory{ 
                             Url = "/v1/TaskTypes/list", 
                             Name = "Get List of Task Types", 
