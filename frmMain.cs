@@ -40,7 +40,7 @@ namespace Acquaint.Integrators.Api.Tests
             PopulateTreeView(categories, treeViewApis);
         }
 
-        private async void treeViewApis_AfterSelect(object sender, TreeViewEventArgs e)
+        private void treeViewApis_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node!.Parent != null)
             {
@@ -51,10 +51,6 @@ namespace Acquaint.Integrators.Api.Tests
                     selectedAPI = selectedSubcategory;
                     txtSelectedAPIUrl.Text = selectedSubcategory.Url;
                     txtAPIRequestBody.Text = selectedSubcategory.RequestBody;
-                    if (selectedAPI.MethodType == ApiMethodType.GET)
-                    {
-                        await executeApis();
-                    }
                 }
             }
         }
@@ -124,7 +120,14 @@ namespace Acquaint.Integrators.Api.Tests
                 }
                 else
                 {
-                    MessageBox.Show("API Call Failed: " + response.StatusCode);
+                    if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        MessageBox.Show($"Please make sure that ID is valid.");
+                    }
+                    else
+                    {
+                        MessageBox.Show($"API Call Failed: {response.StatusCode}");
+                    }
                 }
                 progressBarLoading.Visible = false;
             }
