@@ -122,7 +122,7 @@ namespace Acquaint.Integrators.Api.Tests
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                     {
-                        MessageBox.Show($"Please make sure that Id is valid.");
+                        MessageBox.Show($"Please make sure that ID is valid.");
                     }
                     else
                     {
