@@ -18,7 +18,7 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                             Name = "Get List of Contacts",
                             Url = "/v1/Contacts/list",
                             MethodType = ApiMethodType.GET,
-                            RequestBody = $"{{\r\n    \"firstNames\": \"\",\r\n    \"lastName\": \"\",\r\n    \"companyName\": \"\",\r\n    \"email\": \"\",\r\n    \"telephone\": \"\",\r\n    \"mobile\": \"\",\r\n    \"altReference\": \"\",\r\n    \"type\": 1,\r\n    \"status\": 1,\r\n    \"siteId\": 0,\r\n    \"minUpdatedDate\": \"2017-02-06T11:36:11\",\r\n    \"maxUpdatedDate\": \"2023-02-06T11:36:11\"\r\n}}"
+                            RequestBody = $"{{\r\n    \"firstNames\": \"\",\r\n    \"lastName\": \"\",\r\n    \"companyName\": \"\",\r\n    \"email\": \"\",\r\n    \"telephone\": \"\",\r\n    \"mobile\": \"\",\r\n    \"altReference\": \"\",\r\n    \"type\": 1,\r\n    \"status\": 1,\r\n    \"siteId\": 0,\r\n    \"minUpdatedDate\": \"2017-02-06T11:36:11\",\r\n    \"maxUpdatedDate\": \"2023-02-06T11:36:11\",\r\n    \"currentPage\": 1,\r\n    \"pageSize\": 1000\r\n}}"
                         },
                         new Subcategory{
                             Name = "Update Contact",
@@ -63,7 +63,12 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                     Name = "Contact Sources",
                     Subcategories = new List<Subcategory>
                     {
-                        new Subcategory{ Url ="/v1/ContactSources/list", Name = "Get All Contact Sources", MethodType = ApiMethodType.GET },
+                        new Subcategory{ 
+                            Url ="/v1/ContactSources/list", 
+                            Name = "Get List Of Contact Sources", 
+                            MethodType = ApiMethodType.GET,
+                            RequestBody = $"{{\r\n    \"currentPage\": 0,\r\n    \"pageSize\": 0\r\n}}"
+                        },
                         new Subcategory{ Url ="/v1/ContactSources/1", Name = "Get Contact Source By Id", MethodType = ApiMethodType.GET },
                     }
                 },
@@ -73,7 +78,12 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                     Subcategories = new List<Subcategory>
                     {
                         new Subcategory{ Url = "/v1/ContactStatuses/1", Name = "Get Contact Statuss By Id", MethodType = ApiMethodType.GET },
-                        new Subcategory{ Url ="/v1/ContactStatuses/list", Name = "Get All Contact Statuses", MethodType = ApiMethodType.GET },
+                        new Subcategory{ 
+                            Url ="/v1/ContactStatuses/list", 
+                            Name = "Get List Of Contact Statuses", 
+                            MethodType = ApiMethodType.GET,
+                            RequestBody = $"{{\r\n    \"currentPage\": 0,\r\n    \"pageSize\": 0\r\n}}"
+                        },
                     }
                 },
                  new Category
@@ -81,7 +91,12 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                     Name = "Contact Titles",
                     Subcategories = new List<Subcategory>
                     {
-                        new Subcategory{ Url ="/v1/ContactTitles/list", Name = "Get All Contact Titles", MethodType = ApiMethodType.GET },
+                        new Subcategory{ 
+                            Url ="/v1/ContactTitles/list", 
+                            Name = "Get List Of Contact Titles", 
+                            MethodType = ApiMethodType.GET,
+                            RequestBody = $"{{\r\n    \"currentPage\": 0,\r\n    \"pageSize\": 0\r\n}}"
+                        },
                         new Subcategory{ Url ="/v1/ContactTitles/1", Name = "Get Contact Title By Id", MethodType = ApiMethodType.GET },
                     }
                 },
@@ -90,7 +105,12 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                     Name = "Contact Types",
                     Subcategories = new List<Subcategory>
                     {
-                        new Subcategory{ Url = "/v1/ContactTypes/list", Name= "Get All Contact Types", MethodType = ApiMethodType.GET },
+                        new Subcategory{ 
+                            Url = "/v1/ContactTypes/list", 
+                            Name= "Get List Of Contact Types", 
+                            MethodType = ApiMethodType.GET,
+                            RequestBody = $"{{\r\n    \"currentPage\": 0,\r\n    \"pageSize\": 0\r\n}}"
+                        },
                         new Subcategory{ Url = "/v1/ContactTypes/1", Name = "Get Contact Types By Id", MethodType = ApiMethodType.GET },
                     }
                 },
@@ -99,10 +119,15 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                     Name = "Management Types",
                     Subcategories = new List<Subcategory>
                     {
-                        new Subcategory{ Url = "/v1/ManagementTypes/list", Name = "Get All Management Types", MethodType = ApiMethodType.GET },
+                        new Subcategory{ 
+                            Url = "/v1/ManagementTypes/list", 
+                            Name = "Get List Of Management Types", 
+                            MethodType = ApiMethodType.GET,
+                            RequestBody = $"{{\r\n    \"currentPage\": 0,\r\n    \"pageSize\": 0\r\n}}"
+                        },
                         new Subcategory{ Url = "/v1/ManagementTypes/1", Name = "Get Management Type By Id", MethodType = ApiMethodType.GET },
                     }
-                },               
+                },
                 new Category
                 {
                     Name = "Notes",
@@ -113,7 +138,7 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                             Url ="/v1/Notes/list",
                             Name = "Get  List of Notes",
                             MethodType = ApiMethodType.GET,
-                            RequestBody = $"{{\r\n    \"contactId\": 390,\r\n    \"propertyId\": null,    \r\n    \"minUpdatedDate\": null,\r\n    \"maxUpdatedDate\": \"2024-10-15T00:00:00\"   \r\n}}"
+                            RequestBody = $"{{\r\n    \"contactId\": 390,\r\n    \"propertyId\": null,    \r\n    \"minUpdatedDate\": null,\r\n    \"maxUpdatedDate\": \"2024-10-15T00:00:00\",\r\n    \"currentPage\": 0,\r\n    \"pageSize\": 0\r\n}}"
                         },
                         new Subcategory{
                             Url ="/v1/Notes/1",
@@ -139,7 +164,7 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                             Name = "Get List Of Properties",
                             Url ="/v1/Properties/list",
                             MethodType = ApiMethodType.GET,
-                            RequestBody = $"{{\r\n    \"propertyName\": \"\",\r\n    \"street\": \"\",\r\n    \"locality\": \"\",\r\n    \"town\": \"\",\r\n    \"postcode\": \" oX10\",\r\n    \"altReference\": \"B231\",\r\n    \"contactId\": 0,\r\n    \"categoryId\": 0,\r\n    \"statusId\": 3,\r\n    \"tenureId\": 0,\r\n    \"propertyAreaId\": 0,\r\n    \"minPrice\": 110.0,\r\n    \"maxPrice\": 222220.0,\r\n    \"bedrooms\": 0,\r\n    \"siteId\": 0,\r\n    \"minUpdatedDate\": \"2022-04-03T00:00:00\",\r\n    \"maxUpdatedDate\": \"2024-04-03T00:00:00\"\r\n}}"
+                            RequestBody = $"{{\r\n    \"propertyName\": \"\",\r\n    \"street\": \"\",\r\n    \"locality\": \"\",\r\n    \"town\": \"\",\r\n    \"postcode\": \" oX10\",\r\n    \"altReference\": \"B231\",\r\n    \"contactId\": 0,\r\n    \"categoryId\": 0,\r\n    \"statusId\": 3,\r\n    \"tenureId\": 0,\r\n    \"propertyAreaId\": 0,\r\n    \"minPrice\": 110.0,\r\n    \"maxPrice\": 222220.0,\r\n    \"bedrooms\": 0,\r\n    \"siteId\": 0,\r\n    \"minUpdatedDate\": \"2022-04-03T00:00:00\",\r\n    \"maxUpdatedDate\": \"2024-04-03T00:00:00\",\r\n    \"currentPage\": 0,\r\n    \"pageSize\": 0\r\n}}"
                         }
                     }
                 },
@@ -148,7 +173,13 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                     Name = "Propertie Areas",
                     Subcategories = new List<Subcategory>
                     {
-                        new Subcategory { Url = "/v1/PropertyAreas/list", Name = "Get All Property Areas", MethodType= ApiMethodType.GET },
+                        new Subcategory
+                        {
+                            Url = "/v1/PropertyAreas/list",
+                            Name = "Get List Of Property Areas",
+                            MethodType= ApiMethodType.GET,
+                            RequestBody = $"{{\r\n    \"currentPage\": 0,\r\n    \"pageSize\": 0\r\n}}"
+                        },
                         new Subcategory { Url = "/v1/PropertyAreas/1", Name = "Get Property Area By Id", MethodType= ApiMethodType.GET },
                     }
                 },
@@ -162,7 +193,7 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                             Url = "/v1/PropertyOffers/list",
                             Name = "Get List of Property Offers",
                             MethodType = ApiMethodType.GET,
-                            RequestBody = $"{{\r\n    \"contactId\": 2327,\r\n    \"propertyId\": 101,\r\n    \"minUpdatedDate\": \"2004-03-15T00:00:00\",\r\n    \"maxUpdatedDate\": \"2024-03-15T00:00:00\"\r\n}}"
+                            RequestBody = $"{{\r\n    \"contactId\": 2327,\r\n    \"propertyId\": 101,\r\n    \"minUpdatedDate\": \"2004-03-15T00:00:00\",\r\n    \"maxUpdatedDate\": \"2024-03-15T00:00:00\",\r\n    \"currentPage\": 0,\r\n    \"pageSize\": 0\r\n}}"
                         },
                         new Subcategory{
                             Url ="/v1/PropertyOffers/1",
@@ -197,7 +228,12 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                     Name = "Property Tax Bands",
                     Subcategories = new List<Subcategory>
                     {
-                        new Subcategory { Url = "/v1/PropertyTaxBands/list", Name = "Get All Property Tax Bands", MethodType = ApiMethodType.GET },
+                        new Subcategory { 
+                            Url = "/v1/PropertyTaxBands/list", 
+                            Name = "Get List Of Property Tax Bands", 
+                            MethodType = ApiMethodType.GET,
+                            RequestBody = $"{{\r\n    \"currentPage\": 0,\r\n    \"pageSize\": 0\r\n}}"
+                        },
                         new Subcategory { Url = "/v1/PropertyTaxBands/2", Name = "Get Property Tax Band By Id", MethodType = ApiMethodType.GET }
                     }
                 },
@@ -205,8 +241,13 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                 {
                     Name = "Property Types",
                     Subcategories = new List<Subcategory>
-                    {                       
-                        new Subcategory { Url = "/v1/Propertytypes/list", Name = "Get All Property Types", MethodType= ApiMethodType.GET },
+                    {
+                        new Subcategory { 
+                            Url = "/v1/Propertytypes/list", 
+                            Name = "Get List Of Property Types", 
+                            MethodType= ApiMethodType.GET,
+                            RequestBody = $"{{\r\n    \"currentPage\": 0,\r\n    \"pageSize\": 0\r\n}}"
+                        },
                         new Subcategory { Url = "/v1/Propertytypes/1", Name = "Get Property Type By Id", MethodType= ApiMethodType.GET }
                     }
                 },
@@ -216,7 +257,7 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                     Subcategories = new List<Subcategory>
                     {
                         new Subcategory{ Url = "/v1/Sites/0", Name = "Get Site By Id", MethodType= ApiMethodType.GET },
-                        new Subcategory{ Url = "/v1/Sites/list", Name = "Get All Sites", MethodType = ApiMethodType.GET },
+                        new Subcategory{ Url = "/v1/Sites/list", Name = "Get List Of Sites", MethodType = ApiMethodType.GET },
                     }
                 },
                 new Category
@@ -229,7 +270,7 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                             Url ="/v1/Tasks/list",
                             Name = "Get  List of Tasks",
                             MethodType = ApiMethodType.GET,
-                            RequestBody = $"{{\r\n    \"contactId\": null,\r\n    \"propertyId\": 1103,\r\n    \"assignedUserId\": 1,\r\n    \"minUpdatedDate\": null,\r\n    \"maxUpdatedDate\": \"2024-10-15T00:00:00\",\r\n    \"minCompletedDate\": null,\r\n    \"maxCompletedDate\": null\r\n}}"
+                            RequestBody = $"{{\r\n    \"contactId\": null,\r\n    \"propertyId\": 1103,\r\n    \"assignedUserId\": 1,\r\n    \"minUpdatedDate\": null,\r\n    \"maxUpdatedDate\": \"2024-10-15T00:00:00\",\r\n    \"minCompletedDate\": null,\r\n    \"maxCompletedDate\": null,\r\n    \"currentPage\": 0,\r\n    \"pageSize\": 0\r\n}}"
                         },
                         new Subcategory{
                             Url ="/v1/Tasks/67128",
@@ -251,7 +292,12 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                     Name = "Task Types",
                     Subcategories = new List<Subcategory>
                     {
-                        new Subcategory{ Url = "/v1/TaskTypes/list", Name = "Get All Task Types", MethodType = ApiMethodType.GET },
+                        new Subcategory{ 
+                            Url = "/v1/TaskTypes/list", 
+                            Name = "Get List Of Task Types", 
+                            MethodType = ApiMethodType.GET,
+                            RequestBody = $"{{\r\n    \"currentPage\": 0,\r\n    \"pageSize\": 0\r\n}}"
+                        },
                         new Subcategory{ Url = "/v1/TaskTypes/1", Name = "Get Task Type By Id", MethodType = ApiMethodType.GET },
                     }
                 },
@@ -265,7 +311,7 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                             Url ="/v1/Tenancies/list",
                             Name = "Get List of Tenancies",
                             MethodType = ApiMethodType.GET,
-                            RequestBody = $"{{\r\n    \"contactId\": 1,\r\n    \"propertyId\": 1,\r\n    \"managementTypeId\": 1,\r\n    \"status\": 9,\r\n    \"minUpdatedDate\": \"2023-05-03T09:19:38\",\r\n    \"maxUpdatedDate\": \"2023-05-03T09:19:38\",\r\n    \"minStartDate\": \"2015-04-30T00:00:00\",\r\n    \"maxStartDate\": \"2015-04-30T00:00:00\",\r\n    \"minEndDate\": \"2023-04-29T00:00:00\",\r\n    \"maxEndDate\": \"2023-04-29T00:00:00\"\r\n}}"
+                            RequestBody = $"{{\r\n    \"contactId\": 1,\r\n    \"propertyId\": 1,\r\n    \"managementTypeId\": 1,\r\n    \"status\": 9,\r\n    \"minUpdatedDate\": \"2023-05-03T09:19:38\",\r\n    \"maxUpdatedDate\": \"2023-05-03T09:19:38\",\r\n    \"minStartDate\": \"2015-04-30T00:00:00\",\r\n    \"maxStartDate\": \"2015-04-30T00:00:00\",\r\n    \"minEndDate\": \"2023-04-29T00:00:00\",\r\n    \"maxEndDate\": \"2023-04-29T00:00:00\",\r\n    \"currentPage\": 0,\r\n    \"pageSize\": 0\r\n}}"
                         }
                     }
                 },
@@ -274,7 +320,12 @@ namespace Acquaint.Integrators.Api.Demo.Utilities
                     Name = "Users",
                     Subcategories = new List<Subcategory>
                     {
-                        new Subcategory{ Url = "/v1/Users/list", Name = "Get All Users", MethodType = ApiMethodType.GET },
+                        new Subcategory{ 
+                            Url = "/v1/Users/list", 
+                            Name = "Get List Of Users", 
+                            MethodType = ApiMethodType.GET,
+                            RequestBody = $"{{\r\n    \"siteId\": 0,\r\n    \"currentPage\": 0,\r\n    \"pageSize\": 0\r\n}}"
+                        },
                          new Subcategory{ Url = "/v1/Users/1", Name = "Get User By Id", MethodType = ApiMethodType.GET },
                     }
                  }
