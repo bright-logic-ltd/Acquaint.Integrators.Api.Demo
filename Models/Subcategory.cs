@@ -6,13 +6,15 @@
         public string? Url { get; set; }
         public ApiMethodType MethodType { get; set; }
         public string? RequestBody { get; set; }
+        public bool isUploadFile { get; set; }
+        public string? SupportedFileTypes { get; set; }
     }
 
     public enum ApiMethodType
     {
-        GET,
-        POST,
-        PUT,
-        DELETE
+        Get,
+        Post,
+        Put,
+        Delete
     }
 }
