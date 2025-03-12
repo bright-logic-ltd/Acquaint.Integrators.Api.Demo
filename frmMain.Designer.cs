@@ -35,22 +35,30 @@
             txtSelectedAPIUrl = new TextBox();
             label3 = new Label();
             splitContainer1 = new SplitContainer();
+            labelHttpMethod = new Label();
+            panelRequestBody = new Panel();
+            label6 = new Label();
+            txtAPIRequestBody = new RichTextBox();
+            buttonSelect = new Button();
             txtAPIKey = new TextBox();
             label8 = new Label();
             label7 = new Label();
             comboBoxUrls = new ComboBox();
             treeViewApis = new TreeView();
-            txtAPIRequestBody = new RichTextBox();
-            label6 = new Label();
             label5 = new Label();
             txtAuthRequestBody = new RichTextBox();
             txtSitePrefix = new TextBox();
             label4 = new Label();
+            webViewPdf = new Microsoft.Web.WebView2.WinForms.WebView2();
+            pictureBox = new PictureBox();
             progressBarLoading = new ProgressBar();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            panelRequestBody.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)webViewPdf).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             SuspendLayout();
             // 
             // buttonRun
@@ -99,7 +107,7 @@
             txtSelectedAPIUrl.Font = new Font("Segoe UI", 9F);
             txtSelectedAPIUrl.Location = new Point(6, 526);
             txtSelectedAPIUrl.Name = "txtSelectedAPIUrl";
-            txtSelectedAPIUrl.Size = new Size(490, 23);
+            txtSelectedAPIUrl.Size = new Size(378, 23);
             txtSelectedAPIUrl.TabIndex = 5;
             txtSelectedAPIUrl.KeyDown += txtSelectedAPIUrl_KeyDown;
             // 
@@ -121,13 +129,14 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(labelHttpMethod);
+            splitContainer1.Panel1.Controls.Add(panelRequestBody);
+            splitContainer1.Panel1.Controls.Add(buttonSelect);
             splitContainer1.Panel1.Controls.Add(txtAPIKey);
             splitContainer1.Panel1.Controls.Add(label8);
             splitContainer1.Panel1.Controls.Add(label7);
             splitContainer1.Panel1.Controls.Add(comboBoxUrls);
             splitContainer1.Panel1.Controls.Add(treeViewApis);
-            splitContainer1.Panel1.Controls.Add(txtAPIRequestBody);
-            splitContainer1.Panel1.Controls.Add(label6);
             splitContainer1.Panel1.Controls.Add(buttonRun);
             splitContainer1.Panel1.Controls.Add(label5);
             splitContainer1.Panel1.Controls.Add(txtAuthRequestBody);
@@ -140,12 +149,61 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(webViewPdf);
+            splitContainer1.Panel2.Controls.Add(pictureBox);
             splitContainer1.Panel2.Controls.Add(progressBarLoading);
             splitContainer1.Panel2.Controls.Add(label2);
             splitContainer1.Panel2.Controls.Add(txtApiResponse);
             splitContainer1.Size = new Size(1068, 802);
             splitContainer1.SplitterDistance = 503;
             splitContainer1.TabIndex = 7;
+            // 
+            // labelHttpMethod
+            // 
+            labelHttpMethod.AutoSize = true;
+            labelHttpMethod.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelHttpMethod.Location = new Point(110, 508);
+            labelHttpMethod.Name = "labelHttpMethod";
+            labelHttpMethod.Size = new Size(0, 15);
+            labelHttpMethod.TabIndex = 18;
+            // 
+            // panelRequestBody
+            // 
+            panelRequestBody.Controls.Add(label6);
+            panelRequestBody.Controls.Add(txtAPIRequestBody);
+            panelRequestBody.Location = new Point(3, 555);
+            panelRequestBody.Name = "panelRequestBody";
+            panelRequestBody.Size = new Size(499, 213);
+            panelRequestBody.TabIndex = 17;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(3, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(75, 15);
+            label6.TabIndex = 11;
+            label6.Text = "API Request";
+            // 
+            // txtAPIRequestBody
+            // 
+            txtAPIRequestBody.Font = new Font("Segoe UI", 9F);
+            txtAPIRequestBody.Location = new Point(5, 18);
+            txtAPIRequestBody.Name = "txtAPIRequestBody";
+            txtAPIRequestBody.Size = new Size(489, 188);
+            txtAPIRequestBody.TabIndex = 12;
+            txtAPIRequestBody.Text = "";
+            // 
+            // buttonSelect
+            // 
+            buttonSelect.Enabled = false;
+            buttonSelect.Location = new Point(384, 525);
+            buttonSelect.Name = "buttonSelect";
+            buttonSelect.Size = new Size(112, 24);
+            buttonSelect.TabIndex = 1;
+            buttonSelect.Text = "Select File";
+            buttonSelect.UseVisualStyleBackColor = true;
+            buttonSelect.Click += buttonSelect_Click;
             // 
             // txtAPIKey
             // 
@@ -195,24 +253,6 @@
             treeViewApis.BeforeExpand += treeViewApis_BeforeExpand;
             treeViewApis.AfterSelect += treeViewApis_AfterSelect;
             // 
-            // txtAPIRequestBody
-            // 
-            txtAPIRequestBody.Font = new Font("Segoe UI", 9F);
-            txtAPIRequestBody.Location = new Point(7, 569);
-            txtAPIRequestBody.Name = "txtAPIRequestBody";
-            txtAPIRequestBody.Size = new Size(489, 192);
-            txtAPIRequestBody.TabIndex = 12;
-            txtAPIRequestBody.Text = "";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(5, 551);
-            label6.Name = "label6";
-            label6.Size = new Size(75, 15);
-            label6.TabIndex = 11;
-            label6.Text = "API Request";
-            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -251,6 +291,26 @@
             label4.TabIndex = 7;
             label4.Text = "Base Url";
             // 
+            // webViewPdf
+            // 
+            webViewPdf.AllowExternalDrop = true;
+            webViewPdf.CreationProperties = null;
+            webViewPdf.DefaultBackgroundColor = Color.White;
+            webViewPdf.Location = new Point(3, 36);
+            webViewPdf.Name = "webViewPdf";
+            webViewPdf.Size = new Size(546, 754);
+            webViewPdf.TabIndex = 19;
+            webViewPdf.ZoomFactor = 1D;
+            // 
+            // pictureBox
+            // 
+            pictureBox.Location = new Point(3, 36);
+            pictureBox.Name = "pictureBox";
+            pictureBox.Size = new Size(546, 754);
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox.TabIndex = 6;
+            pictureBox.TabStop = false;
+            // 
             // progressBarLoading
             // 
             progressBarLoading.Location = new Point(407, 7);
@@ -274,6 +334,10 @@
             splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            panelRequestBody.ResumeLayout(false);
+            panelRequestBody.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)webViewPdf).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             ResumeLayout(false);
         }
 
@@ -297,5 +361,10 @@
         private Label label7;
         private TextBox txtAPIKey;
         private Label label8;
+        private PictureBox pictureBox;
+        private Panel panelRequestBody;
+        private Button buttonSelect;
+        private Label labelHttpMethod;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webViewPdf;
     }
 }
