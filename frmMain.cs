@@ -48,7 +48,7 @@ namespace Acquaint.Integrators.Api.Tests
             PopulateTreeView(categories, treeViewApis);
         }
 
-        private async void treeViewApis_AfterSelect(object sender, TreeViewEventArgs e)
+        private void treeViewApis_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node!.Parent != null)
             {
@@ -60,6 +60,7 @@ namespace Acquaint.Integrators.Api.Tests
                     txtSelectedAPIUrl.Text = selectedSubcategory.Url;
                     labelHttpMethod.Text = $"(Http {selectedSubcategory.MethodType.ToString()})";
                     txtAPIRequestBody.Text = selectedSubcategory.RequestBody;
+<<<<<<< HEAD
 <<<<<<< Updated upstream
                     if (selectedAPI.MethodType == ApiMethodType.GET)
                     {
@@ -77,6 +78,8 @@ namespace Acquaint.Integrators.Api.Tests
 
                     resetControls();
 >>>>>>> Stashed changes
+=======
+>>>>>>> 981e7c6af3eed711e8f1b724751cec0af82e9db5
                 }
             }
         }
@@ -191,18 +194,27 @@ namespace Acquaint.Integrators.Api.Tests
                 }
                 else
                 {
+<<<<<<< HEAD
 <<<<<<< Updated upstream
                     MessageBox.Show("API Call Failed: " + response.StatusCode);
 =======
                     if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                     {
                         MessageBox.Show($"Please make sure that ID is valid, {response.ReasonPhrase}");
+=======
+                    if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        MessageBox.Show($"Please make sure that ID is valid.");
+>>>>>>> 981e7c6af3eed711e8f1b724751cec0af82e9db5
                     }
                     else
                     {
                         MessageBox.Show($"API Call Failed: {response.StatusCode}");
                     }
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> 981e7c6af3eed711e8f1b724751cec0af82e9db5
                 }
                 progressBarLoading.Visible = false;
             }
