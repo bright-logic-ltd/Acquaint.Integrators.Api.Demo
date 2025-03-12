@@ -33,9 +33,9 @@ namespace Acquaint.Integrators.Api.Tests
         private void initialFeilds()
         {
             txtAuthRequestBody.ReadOnly = true;
-            baseUrl = GetValueFromRegistry("BaseUrl");
-            txtSitePrefix.Text = GetValueFromRegistry("SitePrefix");
-            txtAPIKey.Text = GetValueFromRegistry("APIKey");
+            baseUrl = getValueFromRegistry("BaseUrl");
+            txtSitePrefix.Text = getValueFromRegistry("SitePrefix");
+            txtAPIKey.Text = getValueFromRegistry("APIKey");
             if (!string.IsNullOrEmpty(baseUrl))
             {
                 comboBoxUrls.SelectedItem = baseUrl;
@@ -45,7 +45,7 @@ namespace Acquaint.Integrators.Api.Tests
                 comboBoxUrls.SelectedIndex = 0;
             }
             setInitialAuthRequest(txtSitePrefix.Text, txtAPIKey.Text);
-            PopulateTreeView(categories, treeViewApis);
+            populateTreeView(categories, treeViewApis);
         }
 
         private void treeViewApis_AfterSelect(object sender, TreeViewEventArgs e)
@@ -60,13 +60,7 @@ namespace Acquaint.Integrators.Api.Tests
                     txtSelectedAPIUrl.Text = selectedSubcategory.Url;
                     labelHttpMethod.Text = $"(Http {selectedSubcategory.MethodType.ToString()})";
                     txtAPIRequestBody.Text = selectedSubcategory.RequestBody;
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-                    if (selectedAPI.MethodType == ApiMethodType.GET)
-                    {
-                        await executeApis();
-                    }
-=======
+
                     if (selectedSubcategory.isUploadFile)
                     {
                         buttonSelect.Enabled = true;
@@ -77,9 +71,6 @@ namespace Acquaint.Integrators.Api.Tests
                     }
 
                     resetControls();
->>>>>>> Stashed changes
-=======
->>>>>>> 981e7c6af3eed711e8f1b724751cec0af82e9db5
                 }
             }
         }
@@ -95,7 +86,7 @@ namespace Acquaint.Integrators.Api.Tests
             }
         }
 
-        private void PopulateTreeView(List<Category> categories, TreeView treeView)
+        private void populateTreeView(List<Category> categories, TreeView treeView)
         {
             foreach (var category in categories)
             {
@@ -150,7 +141,7 @@ namespace Acquaint.Integrators.Api.Tests
                     if (contentType != null && contentType.StartsWith("image/"))
                     {
                         pictureBox.Visible = true;
-                        await DisplayImageFromApiAsync(response);
+                        await displayImageFromApiAsync(response);
                     }
                     else if (contentType != null && contentType!.Contains("application/pdf"))
                     {
@@ -194,27 +185,14 @@ namespace Acquaint.Integrators.Api.Tests
                 }
                 else
                 {
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-                    MessageBox.Show("API Call Failed: " + response.StatusCode);
-=======
                     if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                     {
                         MessageBox.Show($"Please make sure that ID is valid, {response.ReasonPhrase}");
-=======
-                    if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-                    {
-                        MessageBox.Show($"Please make sure that ID is valid.");
->>>>>>> 981e7c6af3eed711e8f1b724751cec0af82e9db5
                     }
                     else
                     {
                         MessageBox.Show($"API Call Failed: {response.StatusCode}");
                     }
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> 981e7c6af3eed711e8f1b724751cec0af82e9db5
                 }
                 progressBarLoading.Visible = false;
             }
@@ -224,7 +202,7 @@ namespace Acquaint.Integrators.Api.Tests
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
         }
-        private async Task DisplayImageFromApiAsync(HttpResponseMessage response)
+        private async Task displayImageFromApiAsync(HttpResponseMessage response)
         {
             try
             {
@@ -404,7 +382,7 @@ namespace Acquaint.Integrators.Api.Tests
                 MessageBox.Show("Error accessing Registry.");
             }
         }
-        private string GetValueFromRegistry(string key)
+        private string getValueFromRegistry(string key)
         {
             var regKey = Registry.CurrentUser.OpenSubKey($"Software\\Acquaint.Integrators.Api", true);
 
@@ -539,7 +517,7 @@ namespace Acquaint.Integrators.Api.Tests
             int newHeight = (int)(originalImage.Height * ratio);
 
             var resizedImage = new Bitmap(newWidth, newHeight);
-            using (Graphics g = Graphics.FromImage(resizedImage))
+            using (var g = Graphics.FromImage(resizedImage))
             {
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                 g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
