@@ -212,7 +212,7 @@ namespace Acquaint.Integrators.Api.Tests
                     using (var originalImage = Image.FromStream(ms))
                     {
                         // Determine the proper size
-                        var newSize = CalculateImageSize(originalImage, MaxWidth, MaxHeight);
+                        var newSize = calculateImageSize(originalImage, MaxWidth, MaxHeight);
 
                         // Resize PictureBox to match the calculated size
                         pictureBox.Width = newSize.Width;
@@ -230,7 +230,7 @@ namespace Acquaint.Integrators.Api.Tests
             }
         }
 
-        private Size CalculateImageSize(Image originalImage, int maxWidth, int maxHeight)
+        private Size calculateImageSize(Image originalImage, int maxWidth, int maxHeight)
         {
             if (originalImage.Width <= maxWidth && originalImage.Height <= maxHeight)
             {
