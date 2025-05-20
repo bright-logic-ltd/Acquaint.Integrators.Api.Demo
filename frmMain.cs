@@ -1,6 +1,7 @@
 using Acquaint.Integrators.Api.Demo.Models;
 using Acquaint.Integrators.Api.Demo.Utilities;
 using BrightLogicCore.Files;
+using DocumentFormat.OpenXml.Packaging;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -168,6 +169,23 @@ namespace Acquaint.Integrators.Api.Tests
                             MessageBox.Show("Error displaying PDF: " + ex.Message);
                         }
                     }
+                    else if (contentType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+                    {
+                        try
+                        {
+                            var docBytes = await response.Content.ReadAsByteArrayAsync();
+                            var tempDocxPath = Path.Combine(Path.GetTempPath(), "tempfile.docx");
+                            await File.WriteAllBytesAsync(tempDocxPath, docBytes);
+
+                            string docText = ReadDocxText(tempDocxPath);
+                            txtApiResponse.Visible = true;
+                            txtApiResponse.Text = $"Path: {tempDocxPath}{Environment.NewLine}Content: {docText}";
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error displaying Word document: " + ex.Message);
+                        }
+                    }
                     else
                     {
                         txtApiResponse.Visible = true;
@@ -191,7 +209,14 @@ namespace Acquaint.Integrators.Api.Tests
                     }
                     else
                     {
-                        MessageBox.Show($"API Call Failed: {response.StatusCode}");
+                        string errorMessage = await response.Content.ReadAsStringAsync();
+
+                        // Optional: Add fallback message if empty
+                        if (string.IsNullOrWhiteSpace(errorMessage))
+                        {
+                            errorMessage = response.ReasonPhrase!;
+                        }
+                        MessageBox.Show($"API Call Failed: {errorMessage}");
                     }
                 }
                 progressBarLoading.Visible = false;
@@ -444,14 +469,12 @@ namespace Acquaint.Integrators.Api.Tests
                     webViewPdf.Visible = false;
                     txtApiResponse.Visible = false;
 
-                    if (extension == ".pdf")
-                    {
-                        pictureBox.Image = null;
-                        webViewPdf.Visible = true;
-                        txtApiResponse.Text = Path.GetFileName(selectedFilePath);
-                        webViewPdf.Source = new Uri(selectedFilePath);
-                    }
-                    else
+                    var imageExtensions = new[] {
+                        ".jpg", ".jpeg", ".png", ".gif", ".bmp",
+                        ".tiff", ".tif", ".webp", ".heic", ".heif",
+                        ".svg"
+                    };
+                    if (imageExtensions.Contains(extension))
                     {
                         try
                         {
@@ -466,6 +489,13 @@ namespace Acquaint.Integrators.Api.Tests
                             MessageBox.Show($"Error displaying image: {ex.Message}");
                             resetControls();
                         }
+                    }
+                    else
+                    {
+                        pictureBox.Image = null;
+                        webViewPdf.Visible = true;
+                        txtApiResponse.Text = Path.GetFileName(selectedFilePath);
+                        webViewPdf.Source = new Uri(selectedFilePath);
                     }
                 }
             }
@@ -578,8 +608,16 @@ namespace Acquaint.Integrators.Api.Tests
                     }
                     else
                     {
+                        var queryString = string.Empty;
+                        if (selectedAPI.IsFromUri)
+                        {
+                            if (!string.IsNullOrEmpty(txtAPIRequestBody.Text))
+                            {
+                                queryString = txtAPIRequestBody.Text.ToQueryString();
+                            }
+                        }
                         response = await _httpClient.PostAsync(
-                            $"{baseUrl}/{txtSelectedAPIUrl.Text}",
+                            $"{baseUrl}/{txtSelectedAPIUrl.Text}{queryString}",
                             byteContent
                         );
                     }
@@ -588,7 +626,7 @@ namespace Acquaint.Integrators.Api.Tests
 
                     if (response.IsSuccessStatusCode)
                     {
-                        MessageBox.Show("Image uploaded successfully!");
+                        MessageBox.Show("Document upload successfully!");
                     }
                     else
                     {
@@ -598,7 +636,7 @@ namespace Acquaint.Integrators.Api.Tests
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error uploading image: {ex.Message}");
+                MessageBox.Show($"Error uploading document: {ex.Message}");
             }
             finally
             {
@@ -617,6 +655,15 @@ namespace Acquaint.Integrators.Api.Tests
             if (webViewPdf != null && webViewPdf.CoreWebView2 != null)
             {
                 webViewPdf.CoreWebView2.Navigate("about:blank");
+            }
+        }
+
+        private string ReadDocxText(string filePath)
+        {
+            using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(filePath, false))
+            {
+                var body = wordDoc.MainDocumentPart?.Document?.Body;
+                return body?.InnerText ?? string.Empty;
             }
         }
     }

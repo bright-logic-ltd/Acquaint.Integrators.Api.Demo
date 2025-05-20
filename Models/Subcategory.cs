@@ -8,6 +8,7 @@
         public string? RequestBody { get; set; }
         public bool isUploadFile { get; set; }
         public string? SupportedFileTypes { get; set; }
+        public bool IsFromUri { get; set; }
     }
 
     public enum ApiMethodType
